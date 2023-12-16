@@ -20,4 +20,9 @@
         android:layout_height="wrap_content"
         android:title="@string/my_account"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_item_customer_support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/call_for_support" />
 </menu>
