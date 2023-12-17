@@ -79,10 +79,14 @@ public class TrainDetailInfoActivity extends AppCompatActivity {
         Log.d("TrainDetail", "uid: " + uid);
 
         // Khi tạo train thì các seats nên được tạo cùng lúc đó
-        new Thread(() -> {
-            List<Seat> seats = createSeatsForTrain(trainId);
-            seatViewModel.insertAllSeats(seats);
-        }).start();
+        seatViewModel.getCountSeatsForTrain(trainId).observe(this, totalCount -> {
+            if (totalCount < 40) {
+                new Thread(() -> {
+                    List<Seat> seats = createSeatsForTrain(trainId);
+                    seatViewModel.insertAllSeats(seats);
+                }).start();
+            }
+        });
 
         int spanCount = 4;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, spanCount);

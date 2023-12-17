@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,7 @@ import java.util.List;
 
 public class TrainActivity extends AppCompatActivity {
     Long uid;
+    private static String PHONE_NUMBER = "0912345678";
     private TrainViewModel trainViewModel;
     private StationViewModel stationViewModel;
 
@@ -149,7 +151,12 @@ public class TrainActivity extends AppCompatActivity {
             Intent myAccountIntent = new Intent(this, EditAccountActivity.class);
             myAccountIntent.putExtra("uid", uid);
             startActivity(myAccountIntent);
+        } else if (item.getItemId() == R.id.menu_item_customer_support) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + PHONE_NUMBER));
+            startActivity(intent);
         }
+
         return false;
     }
 
